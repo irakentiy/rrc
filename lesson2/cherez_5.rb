@@ -1,6 +1,7 @@
 array = []
-for index in (1..20)
-  index *= 5
-  array.push (index) 
+a = 10
+while a < 100 do
+  a += 5
+  array.push (a) 
 end
 puts array

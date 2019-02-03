@@ -1,6 +1,5 @@
-fibo = [0,1]
-while fibo[-1] < 89
-  fibo << fibo[-1] + fibo[-2]
-  fibo.compact! 
+fibo = [0, 1]
+while (result = fibo[-1] + fibo[-2]) < 100
+  fibo << result
 end
 puts fibo

@@ -1,19 +1,16 @@
 months_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-puts "Enter date"
+puts = 'Enter date'
 result = gets.chomp.to_i
-puts "Enter month"
+puts 'Enter month'
 month = gets.chomp.to_i - 1
-puts "Enter year"
+
+months_days.take(month).each {|i| result += i }
+
+puts 'Enter year'
 year = gets.chomp.to_i
 
-for i in 0..month - 1
-  result += months_days[i]
-end
-
-if ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)
+if (month > 1) && (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
   result += 1
 end
 
 puts result
-
-

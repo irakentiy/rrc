@@ -1,4 +1,4 @@
-basket = Hash.new {|hsh, key| hsh[key] = {} }
+basket = {}
 
 loop do
   puts 'what product?'
@@ -6,23 +6,23 @@ loop do
 
   break if product == 'stop'
 
-  puts "what's the price?"
+  puts 'what the price?'
   price = gets.chomp.to_f
 
   puts 'how much?'
   how_much = gets.chomp.to_f
 
-  basket[product][price] = how_much
-end
-sum_total = 0
-basket.each do |product, v|
+  temp = {:price => price, :how_much => how_much }
+ 
+  basket[product] = temp
 
-  sum_product = 0
-  v.each do |price, how_much|
-    sum_product += price * how_much
-    puts "#{product} - #{sum_product}"
-  end
+end
+puts basket
+
+sum_total = 0
+basket.each do |product, temp|
+  sum_product = temp[:price] * temp[:how_much]
+  puts "produck #{product} - #{sum_product}"
   sum_total += sum_product
 end
 puts "total purchase amount #{sum_total}"
-

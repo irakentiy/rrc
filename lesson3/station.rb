@@ -15,10 +15,10 @@ class Station
   end
 
   def freight_trains
-    return @trains.select {|train| train.type == 'freight'}.count
+    @trains.count {|train| train.type == 'freight'}
   end
 
   def passenger_trains
-    return @trains.select {|train| train.type == 'passenger'}.count
+    @trains.count {|train| train.type == 'passenger'}
   end
 end

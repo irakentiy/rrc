@@ -1,6 +1,6 @@
 class Train
 
-  attr_reader :number, :type, :wagons, :speed, :route, :cur_station
+  attr_reader :number, :type, :wagons, :speed, :route, :current_station
 
   def initialize(number, type, wagons = 0)
     @number = number
@@ -31,51 +31,49 @@ class Train
 
   def route=(value)
     @route = value
-    @cur_station = @route.stations[0]
-    @cur_station.accept_train(self)
+    @current_station = @route.stations.first
+    @current_station.accept_train(self)
   end
 
   def step_forward
-    index = @route.stations.index(@cur_station)
-    if index != nil
-      if @cur_station != nil
-          @cur_station.dep_train(self)
+    index = @route.stations.index(@current_station)
+    if index
+      if @current_station
+          @current_station.dep_train(self)
       end
-      @cur_station = @route.stations[index + 1]
-      if @cur_station != nil
-        @cur_station.accept_train(self)
+      @current_station = @route.stations[index + 1]
+      if @current_station
+        @current_station.accept_train(self)
       end
     end
   end
   
   def step_back
-  index = @route.stations.index(@cur_station)
-    if index != nil
-      if @cur_station != nil
-          @cur_station.dep_train(self)
+  index = @route.stations.index(@current_station)
+    if index
+      if @current_station
+          @current_station.dep_train(self)
       end
-      @cur_station = @route.stations[index - 1]
-      if @cur_station != nil
-        @cur_station.accept_train(self)
+      @current_station = @route.stations[index - 1]
+      if @current_station
+        @current_station.accept_train(self)
       end
     end
   end
 
- def forward_station
-    if @route == nil
-      return nil
+  def forward_station
+    if !@route
+      stations = @route.stations
+      index = stations.index(@current_station)
+      index == nil ? nil : stations[index + 1]
     end
-    stations = @route.stations
-    index = stations.index(@cur_station)
-    return index == nil ? nil : stations[index + 1]
   end
   
- def back_station
-    if @route == nil
-      return nil
+  def back_station
+    if !@route
+      stations = @route.stations
+      index = stations.index(@current_station)
+      index == nil ? nil : stations[index - 1]
     end
-    stations = @route.stations
-    index = stations.index(@cur_station)
-    return index == nil ? nil : stations[index - 1]
   end
 end
